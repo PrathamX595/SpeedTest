@@ -8,12 +8,20 @@ import (
 )
 
 func Download(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Length", "10000000")
-	w.Header().Set("Content-Type", "application/octet-stream")
-	data := make([]byte, 1024)
-	for i := 0; i < 10000; i++ {
-		w.Write(data)
-	}
+
+	chunkSize := 1024
+    chunks := 10000
+    totalBytes := chunkSize * chunks
+
+	w.Header().Set("Content-Length", fmt.Sprintf("%d", totalBytes))
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Content-Type", "application/octet-stream")
+
+
+	data := make([]byte, chunkSize)
+    for i := 0; i < chunks; i++ {
+        w.Write(data)
+    }
 }
 
 func Upload(w http.ResponseWriter, r *http.Request) {
