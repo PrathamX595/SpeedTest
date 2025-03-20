@@ -9,6 +9,7 @@ import (
 func Router() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/download", controller.Download)
+	r.HandleFunc("/downloadResults", controller.DownloadResults)
 	r.HandleFunc("/upload", controller.Upload)
 	return r
 }
